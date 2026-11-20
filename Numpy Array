@@ -1,0 +1,63 @@
+import numpy as np
+
+print("------------No 1------------")
+
+a = np.array([5, -3, 8, -1, 0, 7])
+
+print(a[[0, 2, 5]])
+
+print(np.where(a > 0, x="pos", y="not"))
+
+a[a < 0] = 0
+
+print(a)
+
+
+print("------------No 2------------")
+
+names = np.array(["Ali", "sara", "usman", "hina", "bilal", "zara"])
+
+subject = np.array(["math", "physics", "programming", "english"])
+
+scores = np.array([
+    [78, 65, 92, 70],
+    [88, 89, 86, 91],
+    [45, 52, 60, 48],
+    [92, 95, 89, 84],
+    [67, 40, 74, 58],
+    [55, 61, 49, 77]
+])
+
+print(scores.shape)
+
+
+print("------------No 3------------")
+
+third = scores[2]
+
+programming = scores[:, 2]
+
+block = scores[-2:, -2]
+
+failing = scores[scores < 50]
+
+count_80 = (scores >= 80).sum()
+
+physics_pass = names[scores[:, 1] >= 60]
+
+print(third, programming, block, failing, count_80, physics_pass, sep="\n")
+
+
+print("------------No 4------------")
+
+x = np.array([1.0, 2.0, 3.0, 4.0])
+
+print(x + 10)
+
+print(x * x)
+
+print(np.exp(x).round(2))
+
+print(np.log(x).round(3))
+
+print(np.maximum(x, 2.5))
