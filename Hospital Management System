@@ -1,0 +1,126 @@
+
+doctors = {
+    "D101": {"name": "Ali", "fee": 1000},
+    "D102": {"name": "Ahmed", "fee": 1500},
+    "D103": {"name": "Sara", "fee": 1200}
+}
+
+patients = {}
+appointments = {}
+bills = {}
+
+def add_patient():
+    pid = input("Enter Patient ID: ")
+    name = input("Enter Patient Name: ")
+    age = int(input("Enter Age: "))
+    disease = input("Enter Disease: ")
+
+    patients[pid] = {
+        "name": name,
+        "age": age,
+        "disease": disease
+    }
+
+    print("Patient Added Successfully")
+
+def show_doctors():
+    for did in doctors:
+        print(did, doctors[did])
+
+def book_appointment():
+    pid = input("Enter Patient ID: ")
+
+    if pid not in patients:
+        print("Patient Not Found")
+        return
+
+    show_doctors()
+
+    did = input("Enter Doctor ID: ")
+
+    if did not in doctors:
+        print("Doctor Not Found")
+        return
+
+    appointments[pid] = did
+    print("Appointment Booked Successfully")
+
+def generate_bill():
+    pid = input("Enter Patient ID: ")
+
+    if pid not in appointments:
+        print("No Appointment Found")
+        return
+
+    did = appointments[pid]
+    fee = doctors[did]["fee"]
+
+    medicine = int(input("Enter Medicine Charges: "))
+    test = int(input("Enter Test Charges: "))
+
+    total = fee + medicine + test
+
+    bills[pid] = total
+
+    print("Doctor Fee:", fee)
+    print("Medicine:", medicine)
+    print("Test:", test)
+    print("Total Bill:", total)
+
+def display_patients():
+    for pid in patients:
+        print(pid, patients[pid])
+
+def save_report():
+    with open("hospital.txt", "w") as f:
+
+        f.write("HOSPITAL MANAGEMENT REPORT\n")
+
+        for pid in patients:
+            f.write(str(pid) + "\n")
+            f.write(str(patients[pid]) + "\n")
+
+        f.write("\nAppointments:\n")
+        f.write(str(appointments))
+
+        f.write("\nBills:\n")
+        f.write(str(bills))
+
+    print("Report Saved Successfully")
+
+while True:
+
+    print("\n===== HOSPITAL MANAGEMENT =====")
+    print("1. Add Patient")
+    print("2. Show Doctors")
+    print("3. Book Appointment")
+    print("4. Generate Bill")
+    print("5. Display Patients")
+    print("6. Save Report")
+    print("7. Exit")
+
+    choice = input("Enter Choice: ")
+
+    if choice == "1":
+        add_patient()
+
+    elif choice == "2":
+        show_doctors()
+
+    elif choice == "3":
+        book_appointment()
+
+    elif choice == "4":
+        generate_bill()
+
+    elif choice == "5":
+        display_patients()
+
+    elif choice == "6":
+        save_report()
+
+    elif choice == "7":
+        break
+
+    else:
+        print("Invalid Choice")
