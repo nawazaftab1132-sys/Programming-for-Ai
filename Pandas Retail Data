@@ -1,0 +1,64 @@
+import pandas as pd
+import numpy as np
+
+retail_data = {
+    "Transaction Id": ["1001", "1002", "1003", "1004", "1005", "1006", "1007", "1008", "1009", "1010", "1003"],
+
+    "Customer": ["Ali", "Sara", "Usama", "Ayesha", "Bilal", "Hina", "Umer", "Noor", "Zain", "Maha", "Usman"],
+
+    "City": ["Karachi", "Lahore", "Karachi", "Islamabad", "Multan", "Karachi", "Lahore", "Peshawar", "Islamabad", "Multan", "Lahore"],
+
+    "Product": ["Laptop", "Mouse", "Keyboard", "Laptop", "Moniter", "Keyboard", "Mouse", "Laptop", "Keyboard", "Mouse", "Lcd"],
+
+    "Quantity": [2, 5, 3, 7, 6, 5, 3, 5, 7, 6, 8]
+}
+
+raw_df = pd.DataFrame(retail_data)
+
+print(raw_df)
+
+cities = pd.Series(["Lahore", "Karachi", "Islamabad", "Multan"])
+
+print(cities)
+
+print("\nValues:", cities.values)
+
+print("\nIndex:", cities.index)
+
+print("Data Types:", cities.dtype)
+
+raw_df.info()
+
+raw_df.describe()
+
+print("Shape(rows, column):", raw_df.shape)
+
+print("Column:", raw_df.columns.tolist())
+
+print("Missing Value", raw_df.isnull().sum())
+
+print("Data Type", raw_df.dtypes)
+
+print(raw_df.index)
+
+print(raw_df.loc[:, "Customer"])
+
+lahore_sales = raw_df[raw_df["City"] == "Lahore"]
+
+lahore_sales
+
+raw_df[(raw_df["City"] == "Lahore") | (raw_df["City"] == "Multan")]
+
+raw_df[raw_df["Product"].isin(["Laptop", "Monitor"])]
+
+clean_df = raw_df.copy()
+
+clean_df["Store"] = "Main branch"
+
+clean_df["Quantity number"] = pd.to_numeric(clean_df["Quantity"], errors="coerce")
+
+clean_df["Quantity number"] = pd.to_numeric(clean_df["Quantity"], errors="coerce")
+
+clean_df["Quantity number"] = pd.to_numeric(clean_df["Quantity"], errors="coerce")
+
+raw_df.to_csv("Retail Transactions.csv", index=False)
