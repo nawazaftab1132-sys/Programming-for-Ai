@@ -1,0 +1,68 @@
+rent = 100
+
+def calculate_bill(units):
+    if units <= 100:
+        return units * 10 + rent
+    elif units <= 300:
+        return units * 15 + rent
+    else:
+        return units * 20 + rent
+
+customers = {
+    "M101": {"name": "Ali", "units": 80},
+    "M102": {"name": "Sara", "units": 150},
+    "M103": {"name": "Hamza", "units": 320}
+}
+
+meter = input("Enter Meter Number: ").upper()
+name = input("Enter Name: ").title()
+units = int(input("Enter Units: "))
+
+customers[meter] = {"name": name, "units": units}
+
+bills = {}
+total = 0
+highest = 0
+highest_name = ""
+
+low = 0
+medium = 0
+high = 0
+
+for m in customers:
+    n = customers[m]["name"]
+    u = customers[m]["units"]
+    b = calculate_bill(u)
+
+    print(m, n, u, b)
+
+    bills[m] = b
+    total = total + b
+
+    if b > highest:
+        highest = b
+        highest_name = n
+
+    if u <= 100:
+        low = low + 1
+    elif u <= 300:
+        medium = medium + 1
+    else:
+        high = high + 1
+
+print("Total:", total)
+print("Highest:", highest_name, highest)
+print("Bills:", bills)
+print("Low:", low, "Medium:", medium, "High:", high)
+
+
+with open("report.txt", "w") as f:
+    f.write(f"Total Revenue: {total}\n")
+    f.write(f"Highest Bill: {highest_name} - {highest}\n")
+    f.write(f"All Bills: {bills}\n")
+    f.write(f"Low: {low}, Medium: {medium}, High: {high}\n")
+    f.write("\nCustomers Detail:\n")
+    for m in customers:
+        f.write(f"{m} - {customers[m]}\n")
+
+print("File report.txt saved!")
